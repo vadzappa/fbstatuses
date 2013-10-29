@@ -1,16 +1,18 @@
-package com.gts.fb.dto;
+package com.gts.fb.net;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * <p><b> 2013 </b></p>
  *
  * @author Vadim
  */
-public class FacebookResponse {
+public class HttpGetResponse {
     private Integer statusCode;
     private String body;
     private Throwable error;
 
-    public FacebookResponse() {
+    public HttpGetResponse() {
     }
 
     public void setStatusCode(Integer statusCode) {
@@ -35,5 +37,14 @@ public class FacebookResponse {
 
     public Throwable getError() {
         return error;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("statusCode", statusCode)
+                .append("body", body)
+                .append("error", error)
+                .toString();
     }
 }

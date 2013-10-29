@@ -1,7 +1,6 @@
 package com.gts.fb.util;
 
 import java.io.IOException;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -11,8 +10,8 @@ import java.util.logging.Logger;
  * @author Vadim
  */
 public class PropertiesReader {
-    public static Properties readFromResource(Class clazz, String resourcePath) {
-        Properties properties = new Properties();
+    public static EnvSupportProperties readFromResource(Class clazz, String resourcePath) {
+        EnvSupportProperties properties = new EnvSupportProperties();
         try {
             properties.load(clazz.getClassLoader().getResourceAsStream(resourcePath));
         } catch (IOException e) {

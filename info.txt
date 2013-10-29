@@ -1,2 +1,2 @@
-https://www.facebook.com/dialog/oauth?client_id={clientId}&redirect_uri=http://www.facebook.com
-https://graph.facebook.com/oauth/access_token?client_id={clientId}&redirect_uri=http://www.facebook.com/&client_secret={clientSecret}&code={authCode}
+https://www.facebook.com/dialog/oauth?client_id={clientId}&redirect_uri={redirectUrl}
+https://graph.facebook.com/oauth/access_token?client_id={clientId}&redirect_uri={redirectUrl}&client_secret={clientSecret}&code={authCode}
