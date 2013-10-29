@@ -14,6 +14,12 @@ public class TestStatusesRetriever {
     public void testStatusRetrieving() {
         FacebookStatusesRetriever facebookStatusesRetriever = new FacebookStatusesRetriever("Syria", FacebookSearchType.POST);
         JSONObject facebookEntities = facebookStatusesRetriever.findFacebookEntities();
-        System.out.print(facebookEntities);
+        System.out.println(facebookEntities);
+        facebookStatusesRetriever = new FacebookStatusesRetriever("Minsk", FacebookSearchType.POST);
+        facebookEntities = facebookStatusesRetriever.findFacebookEntities();
+        System.out.println(facebookEntities);
+        facebookStatusesRetriever = new FacebookStatusesRetriever("NY City", FacebookSearchType.POST);
+        facebookEntities = facebookStatusesRetriever.findFacebookEntities();
+        System.out.println(facebookEntities);
     }
 }

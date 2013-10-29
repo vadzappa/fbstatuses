@@ -4,6 +4,7 @@ import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Properties;
 
+import com.gts.fb.auth.FacebookAuthorizationFactory;
 import com.gts.fb.net.HttpGetResponse;
 import com.gts.fb.net.HttpGetResponseRetriever;
 import com.gts.fb.util.PropertiesReader;
@@ -16,14 +17,15 @@ import org.apache.http.client.utils.URLEncodedUtils;
  * @author zapolski
  */
 public class FacebookAccessTokenRetriever {
-    private static final Properties properties = PropertiesReader.readFromResource(FacebookStatusesRetriever.class, "at.properties");
+    private static final Properties properties = PropertiesReader.readFromResource(FacebookStatusesRetriever.class, "fb.properties");
 
     private String retrieveTemporaryAccessToken() {
         String url = properties.getProperty("facebook.tokenGenerateUrl");
         url = populateUrlWithBasicDetails(url);
 
-        String redirectUrl = properties.getProperty("facebook.redirectUrl");
-        String userAuthCode = properties.getProperty("facebook.userAuthCode");
+
+        String redirectUrl = FacebookAuthorizationFactory.provide().redirectUrl();
+        String userAuthCode = FacebookAuthorizationFactory.provide().userAuthCode();
 
         url = url.replace("{redirectUrl}", redirectUrl);
         url = url.replace("{authCode}", userAuthCode);
@@ -43,6 +45,9 @@ public class FacebookAccessTokenRetriever {
     }
 
     public String retrieveLongLiveAccessToken() {
+        if (FacebookAuthorizationFactory.provide().existingToken() != null) {
+            return FacebookAuthorizationFactory.provide().existingToken();
+        }
         String url = properties.getProperty("facebook.longLivetokenGenerateUrl");
         url = populateUrlWithBasicDetails(url);
         url = url.replace("${tempAccessToken}", retrieveTemporaryAccessToken());
@@ -56,6 +61,7 @@ public class FacebookAccessTokenRetriever {
         List<NameValuePair> queryStringDetails = URLEncodedUtils.parse(response.getBody(), Charset.defaultCharset());
         for (NameValuePair nameValuePair : queryStringDetails) {
             if (nameValuePair.getName().equalsIgnoreCase("access_token")) {
+                FacebookAuthorizationFactory.provide().setUpNewToken(nameValuePair.getValue());
                 return nameValuePair.getValue();
             }
         }
@@ -63,8 +69,8 @@ public class FacebookAccessTokenRetriever {
     }
 
     private String populateUrlWithBasicDetails(String url) {
-        String clientId = properties.getProperty("facebook.clientId");
-        String clientSecret = properties.getProperty("facebook.clientSecret");
+        String clientId = FacebookAuthorizationFactory.provide().clientId();
+        String clientSecret = FacebookAuthorizationFactory.provide().clientSecret();
         url = url.replace("{clientId}", clientId);
         url = url.replace("{clientSecret}", clientSecret);
         return url;

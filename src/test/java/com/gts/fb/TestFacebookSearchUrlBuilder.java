@@ -12,7 +12,7 @@ import org.junit.Test;
  * @author Vadim
  */
 public class TestFacebookSearchUrlBuilder {
-    private static final Properties properties = PropertiesReader.readFromResource(FacebookStatusesRetriever.class, "at.properties");
+    private static final Properties properties = PropertiesReader.readFromResource(FacebookStatusesRetriever.class, "fb.properties");
 
     @Test
     public void testFacebookSearchUrlBuilder() {

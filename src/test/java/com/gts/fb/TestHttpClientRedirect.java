@@ -2,6 +2,7 @@ package com.gts.fb;
 
 import java.util.Properties;
 
+import com.gts.fb.auth.FacebookAuthorizationFactory;
 import com.gts.fb.net.HttpGetResponse;
 import com.gts.fb.net.HttpGetResponseRetriever;
 import com.gts.fb.util.PropertiesReader;
@@ -13,15 +14,15 @@ import org.junit.Test;
  * @author zapolski
  */
 public class TestHttpClientRedirect {
-    private static final Properties properties = PropertiesReader.readFromResource(FacebookStatusesRetriever.class, "at.properties");
+    private static final Properties properties = PropertiesReader.readFromResource(FacebookStatusesRetriever.class, "fb.properties");
 
     @Test
     public void testHttpClientRedirect() {
         String url = properties.getProperty("facebook.tokenGenerateUrl");
-        String clientId = properties.getProperty("facebook.clientId");
-        String clientSecret = properties.getProperty("facebook.clientSecret");
-        String redirectUrl = properties.getProperty("facebook.redirectUrl");
-        String userAuthCode = properties.getProperty("facebook.userAuthCode");
+        String clientId = FacebookAuthorizationFactory.provide().clientId();
+        String clientSecret = FacebookAuthorizationFactory.provide().clientSecret();
+        String redirectUrl = FacebookAuthorizationFactory.provide().redirectUrl();
+        String userAuthCode = FacebookAuthorizationFactory.provide().userAuthCode();
 
         url = url.replace("{clientId}", clientId);
         url = url.replace("{redirectUrl}", redirectUrl);

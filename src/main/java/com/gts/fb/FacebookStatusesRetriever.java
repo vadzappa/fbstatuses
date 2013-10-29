@@ -2,14 +2,12 @@ package com.gts.fb;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Properties;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.gts.fb.net.HttpGetResponse;
 import com.gts.fb.net.HttpGetResponseRetriever;
-import com.gts.fb.util.PropertiesReader;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,7 +17,6 @@ import org.json.JSONObject;
  * @author Vadim
  */
 public class FacebookStatusesRetriever {
-    private static final Properties properties = PropertiesReader.readFromResource(FacebookStatusesRetriever.class, "at.properties");
     private static Logger LOGGER = Logger.getLogger(FacebookStatusesRetriever.class.getName());
     private static FacebookAccessTokenRetriever facebookAccessTokenRetriever = new FacebookAccessTokenRetriever();
 
