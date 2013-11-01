@@ -10,7 +10,7 @@ import org.junit.Test;
  */
 public class TestStatusesRetriever {
 
-    @Test
+    @Test(expected = java.lang.RuntimeException.class)
     public void testStatusRetrieving() {
         FacebookStatusesRetriever facebookStatusesRetriever = new FacebookStatusesRetriever("Syria", FacebookSearchType.POST);
         JSONObject facebookEntities = facebookStatusesRetriever.findFacebookEntities();

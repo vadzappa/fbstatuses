@@ -11,7 +11,7 @@ public class EnvSupportProperties extends Properties {
     @Override
     public String getProperty(String key) {
         String property = super.getProperty(key);
-        if (property == null || property.isEmpty()) {
+        if (property == null || property.length() == 0) {
             property = System.getenv().get(key);
         }
         return property;
@@ -20,10 +20,10 @@ public class EnvSupportProperties extends Properties {
     @Override
     public String getProperty(String key, String defaultValue) {
         String property = super.getProperty(key);
-        if (property == null || property.isEmpty()) {
+        if (property == null || property.length() == 0) {
             property = System.getenv().get(key);
         }
-        if (property == null || property.isEmpty()) {
+        if (property == null || property.length() == 0) {
             property = defaultValue;
         }
         return property;

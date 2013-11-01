@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.gts.fb.auth.FacebookAuthorizationFactory;
+import com.gts.fb.exception.UnableToCalculateTokenException;
 import com.gts.fb.net.HttpGetResponse;
 import com.gts.fb.net.HttpGetResponseRetriever;
 import com.gts.fb.util.PropertiesReader;
@@ -33,7 +34,7 @@ public class FacebookAccessTokenRetriever {
         HttpGetResponseRetriever httpGetResponseRetriever = new HttpGetResponseRetriever(url);
         HttpGetResponse response = httpGetResponseRetriever.retrieve();
         if (response.getError() != null) {
-            throw new RuntimeException(response.getError().getMessage(), response.getError());
+            throw new UnableToCalculateTokenException(response.getError().getMessage(), response.getError());
         }
         List<NameValuePair> queryStringDetails = URLEncodedUtils.parse(response.getBody(), Charset.defaultCharset());
         for (NameValuePair nameValuePair : queryStringDetails) {
@@ -41,7 +42,7 @@ public class FacebookAccessTokenRetriever {
                 return nameValuePair.getValue();
             }
         }
-        throw new RuntimeException("Unable to get access token");
+        throw new UnableToCalculateTokenException("Unable to get access token");
     }
 
     public String retrieveLongLiveAccessToken() {
@@ -55,7 +56,7 @@ public class FacebookAccessTokenRetriever {
         HttpGetResponseRetriever httpGetResponseRetriever = new HttpGetResponseRetriever(url);
         HttpGetResponse response = httpGetResponseRetriever.retrieve();
         if (response.getError() != null) {
-            throw new RuntimeException(response.getError().getMessage(), response.getError());
+            throw new UnableToCalculateTokenException(response.getError().getMessage(), response.getError());
         }
 
         List<NameValuePair> queryStringDetails = URLEncodedUtils.parse(response.getBody(), Charset.defaultCharset());
@@ -65,7 +66,7 @@ public class FacebookAccessTokenRetriever {
                 return nameValuePair.getValue();
             }
         }
-        throw new RuntimeException("Unable to get access token");
+        throw new UnableToCalculateTokenException("Unable to get access token");
     }
 
     private String populateUrlWithBasicDetails(String url) {

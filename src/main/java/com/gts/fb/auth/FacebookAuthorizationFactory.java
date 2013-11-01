@@ -20,7 +20,7 @@ public final class FacebookAuthorizationFactory {
         return instance.provider;
     }
 
-    public void setProvider(FacebookAuthorizationDetailsProvider provider) {
+    public static void setProvider(FacebookAuthorizationDetailsProvider provider) {
         instance.provider = provider;
     }
 }

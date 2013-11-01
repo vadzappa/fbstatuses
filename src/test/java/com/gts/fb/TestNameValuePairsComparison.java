@@ -16,6 +16,6 @@ public class TestNameValuePairsComparison {
 
         BasicNameValuePair basicNameValuePair1 = new BasicNameValuePair("a", "b");
         BasicNameValuePair basicNameValuePair2 = new BasicNameValuePair("a", "c");
-        Assert.assertEquals(true, basicNameValuePair1.equals(basicNameValuePair2));
+        Assert.assertEquals(false, basicNameValuePair1.equals(basicNameValuePair2));
     }
 }

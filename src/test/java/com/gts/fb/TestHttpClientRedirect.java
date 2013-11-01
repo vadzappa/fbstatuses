@@ -6,7 +6,6 @@ import com.gts.fb.auth.FacebookAuthorizationFactory;
 import com.gts.fb.net.HttpGetResponse;
 import com.gts.fb.net.HttpGetResponseRetriever;
 import com.gts.fb.util.PropertiesReader;
-import org.junit.Test;
 
 /**
  * <p><b> Copyright 2013 (c) Waltz-Soft </b></p>
@@ -16,7 +15,6 @@ import org.junit.Test;
 public class TestHttpClientRedirect {
     private static final Properties properties = PropertiesReader.readFromResource(FacebookStatusesRetriever.class, "fb.properties");
 
-    @Test
     public void testHttpClientRedirect() {
         String url = properties.getProperty("facebook.tokenGenerateUrl");
         String clientId = FacebookAuthorizationFactory.provide().clientId();
