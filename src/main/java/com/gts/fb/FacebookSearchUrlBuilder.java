@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
+import com.gts.fb.util.PropertiesReader;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
@@ -15,7 +17,8 @@ import org.apache.http.message.BasicNameValuePair;
  * @author Vadim
  */
 public class FacebookSearchUrlBuilder {
-    private static final String FACEBOOK_URL = "https://graph.facebook.com/search";
+    private static final Properties properties = PropertiesReader.readFromResource(FacebookStatusesRetriever.class, "fb.properties");
+    private static final String FACEBOOK_URL = properties.getProperty("facebook.graphsearchUrl");
 
     private Map<String, String> parameters = new HashMap<String, String>(0);
 
